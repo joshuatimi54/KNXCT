@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
+const { MONGODB_URI } = require('./env');
 
 const connect = async () => {
-  const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/mydatabase';
+  const uri = MONGODB_URI;
   try {
     await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     console.log('Connected to MongoDB');
