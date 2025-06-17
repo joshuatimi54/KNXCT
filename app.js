@@ -1,14 +1,11 @@
 const createError = require('http-errors');
 const express = require('express');
-const { Sequelize } = require('sequelize');
 const databaseConfig = require('./config/database');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
-const { sequelize } = require('./models');
 
 const app = express();
 
@@ -23,7 +20,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 
 // Connect to the database
 databaseConfig.connect();

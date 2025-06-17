@@ -1,21 +1,13 @@
-const { Sequelize } = require('sequelize');
+const mongoose = require('mongoose');
 
-const sequelize = new Sequelize('mydatabase', 'your_username', 'your_password', {
-  host: 'localhost',
-  dialect: 'postgres',
-  logging: false, // Disable logging; default: console.log
-  define: {
-    timestamps: true, // Automatically add createdAt and updatedAt fields
+const connect = async () => {
+  const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/mydatabase';
+  try {
+    await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+    console.log('Connected to MongoDB');
+  } catch (err) {
+    console.error('MongoDB connection error:', err);
   }
-});
+};
 
-// Test the connection
-sequelize.authenticate()
-  .then(() => {
-    console.log('Connection to PostgreSQL has been established successfully.');
-  })
-  .catch(err => {
-    console.error('Unable to connect to the database:', err);
-  });
-
-module.exports = sequelize;
+module.exports = { connect };
