@@ -1,5 +1,6 @@
 const { Job } = require('../models');
 const Joi = require('joi');
+const { pushToCMS } = require('../utils/cms');
 
 const jobSchema = Joi.object({
   description: Joi.string().required(),
@@ -32,6 +33,8 @@ exports.create = async (req, res) => {
       return res.status(400).json({ success: false, message: error.message });
     }
     const job = await Job.create(value);
+    // push to CMS but don't block response
+    pushToCMS(job).catch(() => {});
     res.status(201).json({ success: true, message: 'Action completed', data: job });
   } catch (err) {
     res.status(400).json({ success: false, message: 'Error creating job' });
