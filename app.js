@@ -4,6 +4,7 @@ const databaseConfig = require('./config/database');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const rateLimit = require('express-rate-limit');
 const { swaggerUi, swaggerSpec } = require('./swagger');
 
 const indexRouter = require('./routes/index');
@@ -20,9 +21,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Apply basic rate limiting to all requests
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100
+});
+app.use(limiter);
+
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-app.use('/', indexRouter);
+app.use('/api', indexRouter);
 
 // Connect to the database
 databaseConfig.connect();

@@ -28,7 +28,7 @@ router.get('/jobs', jobController.getAll);
  *       201:
  *         description: Job created
  */
-router.post('/api/jobs/new', jobController.create);
+router.post('/jobs/new', jobController.create);
 
 router.get('/candidates', candidateController.getAll);
 /**
@@ -47,7 +47,7 @@ router.get('/candidates', candidateController.getAll);
  *       201:
  *         description: Candidate created
  */
-router.post('/api/candidates/register', candidateController.create);
+router.post('/candidates/register', candidateController.create);
 /**
  * @swagger
  * /api/candidates/update/{id}:
@@ -71,7 +71,7 @@ router.post('/api/candidates/register', candidateController.create);
  *       200:
  *         description: Candidate updated
  */
-router.put('/api/candidates/update/:id', candidateController.update);
+router.put('/candidates/update/:id', candidateController.update);
 
 router.get('/bookings', bookingController.getAll);
 router.post('/bookings', bookingController.create);
@@ -96,7 +96,7 @@ router.post('/bookings', bookingController.create);
  *       200:
  *         description: Booking confirmed
  */
-router.post('/api/booking/confirm', bookingController.confirm);
+router.post('/booking/confirm', bookingController.confirm);
 
 router.get('/rewards', rewardController.getAll);
 router.post('/rewards', rewardController.create);
@@ -123,7 +123,7 @@ router.post('/rewards', rewardController.create);
  *       200:
  *         description: Reward updated
  */
-router.post('/api/rewards/update', rewardController.update);
+router.post('/rewards/update', rewardController.update);
 
 /**
  * @swagger
@@ -135,6 +135,6 @@ router.post('/api/rewards/update', rewardController.update);
  *       200:
  *         description: Status information
  */
-router.get('/api/status/check', systemController.status);
+router.get('/status/check', systemController.status);
 
 module.exports = router;
