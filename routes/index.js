@@ -74,7 +74,7 @@ router.post('/candidates/register', candidateController.create);
 router.put('/candidates/update/:id', candidateController.update);
 
 router.get('/bookings', bookingController.getAll);
-router.post('/bookings', bookingController.create);
+router.post('/booking', bookingController.create);
 /**
  * @swagger
  * /api/booking/confirm:
