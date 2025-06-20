@@ -9,9 +9,9 @@ const bookingSchema = Joi.object({
 exports.getAll = async (req, res) => {
   try {
     const items = await Booking.find().populate('candidate_id job_id');
-    res.json(items);
+    res.json({ success: true, message: 'Action completed', data: items });
   } catch (err) {
-    res.status(500).json({ message: 'Error retrieving bookings', err });
+    res.status(500).json({ success: false, message: 'Error retrieving bookings' });
   }
 };
 

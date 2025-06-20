@@ -71,3 +71,5 @@ Update reward data for a candidate.
 Simple health check returning database status.
 
 Run the server with `npm start` after creating a `.env` file based on `.env.example`.
+
+All API requests must include an `x-api-key` header matching the value in your environment configuration.

@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const rateLimit = require('express-rate-limit');
 const { swaggerUi, swaggerSpec } = require('./swagger');
+const apiKeyAuth = require('./middleware/apiKeyAuth');
 
 const indexRouter = require('./routes/index');
 
@@ -30,7 +31,7 @@ app.use(limiter);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-app.use('/api', indexRouter);
+app.use('/api', apiKeyAuth, indexRouter);
 
 // Connect to the database
 databaseConfig.connect();
