@@ -8,7 +8,8 @@ const bookingSchema = Joi.object({
 
 exports.getAll = async (req, res) => {
   try {
-    const items = await Booking.find().populate('candidate_id job_id');
+    const items = await Booking.find()
+      .select('_id candidate_id job_id confirmed_at createdAt status updatedAt');
     res.json({ success: true, message: 'Action completed', data: items });
   } catch (err) {
     res.status(500).json({ success: false, message: 'Error retrieving bookings' });
