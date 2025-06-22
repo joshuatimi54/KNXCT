@@ -6,9 +6,20 @@ const options = {
     openapi: '3.0.0',
     info: {
       title: 'KNXCT API',
-      version: '1.0.0'
+      version: '1.0.0',
+      description: 'All endpoints require the `x-api-key` header to be set with your API key.'
     },
+    servers: [{ url: 'http://localhost:3000/api' }],
+    security: [{ ApiKeyAuth: [] }],
     components: {
+      securitySchemes: {
+        ApiKeyAuth: {
+          type: 'apiKey',
+          in: 'header',
+          name: 'x-api-key',
+          description: 'API key required to authorize requests'
+        }
+      },
       schemas: {
         Job: {
           type: 'object',

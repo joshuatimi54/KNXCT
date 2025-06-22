@@ -11,6 +11,18 @@ router.get('/', (req, res) => {
   res.send('API is running');
 });
 
+/**
+ * @swagger
+ * /api/jobs:
+ *   get:
+ *     summary: Retrieve all jobs
+ *     tags: [Jobs]
+ *     responses:
+ *       200:
+ *         description: List of jobs
+ *       500:
+ *         description: Server error
+ */
 router.get('/jobs', jobController.getAll);
 /**
  * @swagger
@@ -27,9 +39,23 @@ router.get('/jobs', jobController.getAll);
  *     responses:
  *       201:
  *         description: Job created
+ *       400:
+ *         description: Validation error
  */
 router.post('/jobs/new', jobController.create);
 
+/**
+ * @swagger
+ * /api/candidates:
+ *   get:
+ *     summary: Retrieve all candidates
+ *     tags: [Candidates]
+ *     responses:
+ *       200:
+ *         description: List of candidates
+ *       500:
+ *         description: Server error
+ */
 router.get('/candidates', candidateController.getAll);
 /**
  * @swagger
@@ -46,6 +72,8 @@ router.get('/candidates', candidateController.getAll);
  *     responses:
  *       201:
  *         description: Candidate created
+ *       400:
+ *         description: Validation error
  */
 router.post('/candidates/register', candidateController.create);
 /**
@@ -70,10 +98,49 @@ router.post('/candidates/register', candidateController.create);
  *     responses:
  *       200:
  *         description: Candidate updated
+ *       400:
+ *         description: Validation error
+ *       404:
+ *         description: Candidate not found
  */
 router.put('/candidates/update/:id', candidateController.update);
 
+/**
+ * @swagger
+ * /api/bookings:
+ *   get:
+ *     summary: Retrieve all bookings
+ *     tags: [Bookings]
+ *     responses:
+ *       200:
+ *         description: List of bookings
+ *       500:
+ *         description: Server error
+ */
 router.get('/bookings', bookingController.getAll);
+/**
+ * @swagger
+ * /api/booking:
+ *   post:
+ *     summary: Create a booking record
+ *     tags: [Bookings]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               candidate_id:
+ *                 type: string
+ *               job_id:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Booking created
+ *       400:
+ *         description: Validation error
+ */
 router.post('/booking', bookingController.create);
 /**
  * @swagger
@@ -95,10 +162,49 @@ router.post('/booking', bookingController.create);
  *     responses:
  *       200:
  *         description: Booking confirmed
+ *       400:
+ *         description: Validation error
  */
 router.post('/booking/confirm', bookingController.confirm);
 
+/**
+ * @swagger
+ * /api/rewards:
+ *   get:
+ *     summary: Retrieve all rewards
+ *     tags: [Rewards]
+ *     responses:
+ *       200:
+ *         description: List of rewards
+ *       500:
+ *         description: Server error
+ */
 router.get('/rewards', rewardController.getAll);
+/**
+ * @swagger
+ * /api/rewards:
+ *   post:
+ *     summary: Create reward information
+ *     tags: [Rewards]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               candidate_id:
+ *                 type: string
+ *               shifts_completed:
+ *                 type: integer
+ *               bonus_amount:
+ *                 type: number
+ *     responses:
+ *       201:
+ *         description: Reward created
+ *       400:
+ *         description: Validation error
+ */
 router.post('/rewards', rewardController.create);
 /**
  * @swagger
@@ -122,6 +228,8 @@ router.post('/rewards', rewardController.create);
  *     responses:
  *       200:
  *         description: Reward updated
+ *       400:
+ *         description: Validation error
  */
 router.post('/rewards/update', rewardController.update);
 
