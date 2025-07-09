@@ -31,7 +31,7 @@ app.use(limiter);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-app.use('/v1', apiKeyAuth, indexRouter);
+app.use('/api', apiKeyAuth, indexRouter);
 
 // Connect to the database
 databaseConfig.connect();
