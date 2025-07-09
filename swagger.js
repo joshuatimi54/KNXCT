@@ -9,7 +9,7 @@ const options = {
       version: '1.0.0',
       description: 'All endpoints require the `x-api-key` header to be set with your API key.'
     },
-    servers: [{ url: 'http://localhost:3000/api' }],
+    servers: [{ url: 'http://api.knxct.com/v1' }],
     security: [{ ApiKeyAuth: [] }],
     components: {
       securitySchemes: {
